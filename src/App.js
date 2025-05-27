@@ -9,7 +9,8 @@ function App() {
   }, []);
 
   const loadStep = (stepId) => {
-    fetch(`http://localhost:8080/api/steps/${stepId}`)
+    //fetch(`http://localhost:8080/api/steps/${stepId}`)
+    fetch(`https://izischool.onrender.com/api/steps/${stepId}`)
       .then((res) => res.json())
       .then((data) => setStep(data));
   };
