@@ -1,0 +1,120 @@
+.step-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.step-header {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.step-content {
+  margin-bottom: 30px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
+.question-block {
+  margin-bottom: 30px;
+}
+
+.question-input label,
+.question-choice label {
+  display: flex;
+  gap: 10px;
+  line-height: 1.4;
+
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.question-input input,
+.question-choice input {
+  margin-bottom: 16px;
+  padding: 6px 10px;
+  width: auto;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+.question-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.next-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007acc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.next-button:hover {
+  background-color: #005fa3;
+}
+
+/* ------------------- */
+/* 📱 Адаптация для маленьких экранов */
+@media (max-width: 600px) {
+  .step-container {
+    padding: 15px;
+    margin: 20px 10px;
+  }
+
+  .step-header {
+    font-size: 22px;
+  }
+
+  .step-content {
+    font-size: 16px;
+  }
+
+  .next-button {
+    width: 100%;
+    font-size: 18px;
+  }
+
+  .question-choice input {
+    width: auto;
+  }
+
+
+
+  .question-choice {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 1rem;
+  }
+
+  .question-choice label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 1rem;
+    line-height: 1.4;
+    cursor: pointer;
+  }
+
+  .question-choice input[type="radio"] {
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .question-choice label span {
+    word-break: break-word;
+    max-width: 100%;
+  }
+
+}
