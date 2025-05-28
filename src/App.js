@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import StepView from './components/StepView';
 
 function App() {
+  const beApiBaseUrl = process.env.REACT_APP_BE_API_BASE_URL;
   const [step, setStep] = useState(null);
 
   useEffect(() => {
@@ -9,8 +10,7 @@ function App() {
   }, []);
 
   const loadStep = (stepId) => {
-    //fetch(`http://localhost:8080/api/steps/${stepId}`)
-    fetch(`https://izischool.onrender.com/api/steps/${stepId}`)
+    fetch(`${beApiBaseUrl}/api/steps/${stepId}`)
       .then((res) => res.json())
       .then((data) => setStep(data));
   };
