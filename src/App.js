@@ -6,7 +6,7 @@ function App() {
   const [step, setStep] = useState(null);
 
   useEffect(() => {
-    loadStep('1'); // начальный шаг
+    loadStep('1'); // first step
   }, []);
 
   const loadStep = (stepId) => {

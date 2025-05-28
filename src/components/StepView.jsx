@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './StepView.css';
+import { getLocalizedText } from '../utils/localizedText';
+import { getLocalizedTextWithInfo } from '../utils/localizedTextWithInfo';
 
 function StepView({ step, onNext }) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedChoice, setSelectedChoice] = React.useState(null);
 
-  // ⬇️ Сброс выбора при переходе на новый шаг
+  const availableLanguages = ['RU', 'EN', 'UK']; // Добавь нужные языки
+  const [currentLanguage, setCurrentLanguage] = useState('EN');
+
+
+  // reset on new step
   useEffect(() => {
     setSelectedOption(null);
     setSelectedChoice(null);
@@ -28,19 +34,44 @@ function StepView({ step, onNext }) {
 
   return (
     <div className="step-container">
+
+    <div style={{ position: 'absolute', top: 10, right: 10 }}>
+        <select
+          value={currentLanguage}
+          onChange={(e) => setCurrentLanguage(e.target.value)}
+        >
+          {availableLanguages.map((lang) => (
+            <option key={lang} value={lang}>
+              {lang}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="step-header">Шаг #{step.id}</div>
 
-      <div className="step-content">
-        {step.content?.blocks?.map((block, index) => (
-          <p key={index}>{block.value}</p>
-        ))}
-      </div>
+        <div className="step-content">
+          {step.content?.blocks?.map((block, index) => {
+            const { text, fallback, usedLang } = getLocalizedTextWithInfo(block.value, currentLanguage);
+
+            return (
+              <p key={index}>
+                {text}
+                {fallback && (
+                  <span style={{ color: 'orange', fontSize: '0.9em', marginLeft: '8px' }}>
+                    (Показан перевод: {usedLang})
+                  </span>
+                )}
+              </p>
+            );
+          })}
+        </div>
 
       {step.question?.type === 'TEXT_INPUT' && (
         <div className="question-block question-input">
           {step.question.inputs.map((input) => (
             <div key={input.id}>
-              <label>{input.text}</label>
+              <label>{getLocalizedText(input.text, currentLanguage)}</label>
               <input type="text" />
             </div>
           ))}
@@ -50,7 +81,7 @@ function StepView({ step, onNext }) {
       {step.question?.type === 'INFO_ONLY' && (
         <div className="question-block info-block">
           {step.question.content?.blocks?.map((block, index) => (
-            <p key={index}>{block.value}</p>
+            <p key={index}>{getLocalizedText(block.value, currentLanguage)}</p>
           ))}
         </div>
       )}
@@ -58,7 +89,7 @@ function StepView({ step, onNext }) {
       {step.question?.type === 'CHOICE' && (
         <div className="question-choice">
           {step.question.content?.blocks?.map((block, index) => (
-            <p key={index}>{block.value}</p>
+            <p key={index}>{getLocalizedText(block.value, currentLanguage)}</p>
           ))}
           {step.question.options.map((option) => (
             <label key={option.id}>
@@ -69,7 +100,7 @@ function StepView({ step, onNext }) {
                 checked={selectedChoice === option.id}
                 onChange={() => setSelectedChoice(option.id)}
               />
-              <span>{option.text}</span>
+              <span>{getLocalizedText(option.text, currentLanguage)}</span>
             </label>
           ))}
         </div>
