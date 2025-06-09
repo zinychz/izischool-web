@@ -48,6 +48,12 @@
   gap: 12px;
 }
 
+.inline,
+.inline label {
+    display: inline-block;
+    margin-right: 6px;
+}
+
 .next-button {
   margin-top: 20px;
   padding: 10px 20px;

@@ -7,6 +7,7 @@ function App() {
 
   useEffect(() => {
     loadStep('1'); // first step
+//    loadStep('6c02df6e-d570-4c8d-82a0-c786c51d73c6'); // first step
   }, []);
 
   const loadStep = (stepId) => {

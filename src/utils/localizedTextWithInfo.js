@@ -7,7 +7,8 @@ export function getLocalizedTextWithInfo(
   }
 
   if (!value || !value.localized) {
-    return { text: '', usedLang: '', fallback: true };
+//    return { text: '', usedLang: '', fallback: true };
+    return { text: '', usedLang: '', fallback: false };
   }
 
   if (value.localized[lang]) {
@@ -24,5 +25,6 @@ export function getLocalizedTextWithInfo(
     };
   }
 
-  return { text: '', usedLang: '', fallback: true };
+//  return { text: '', usedLang: '', fallback: true };
+  return { text: '', usedLang: '', fallback: false };
 }
